@@ -12,8 +12,8 @@ def sort(xs : Array[Int]) : Array[Int] = {
     )
   }
 }
-sort(Seq.fill(100)(Random.nextInt(100)).toArray).foreach(x=>print (" " + x))
-sort((1 to 100).toArray).mkString(" ")
+sort(Seq.fill(10)(Random.nextInt(100)).toArray).foreach(x=>print (" " + x))
+sort((1 to 10).toArray).mkString(" ")
 // CBV vs CBN
 def loop : Int = loop
 def constOnt(x:Int, y: => Int) = 1
@@ -25,8 +25,10 @@ def abs(x: Double): Double = if (x < 0) -x else x
 def square(x: Double) : Double = x * x
 
 def sqrt(x: Double): Double = {
-  def isGoodEnough(guess: Double): Boolean =
+  def isGoodEnough(guess: Double): Boolean = {
+    println(guess, abs(square(guess) - x))
     abs(square(guess) - x) / x < 0.001
+  }
 
   def improve(guess: Double) : Double =
     (guess + x / guess) / 2
@@ -39,9 +41,6 @@ def sqrt(x: Double): Double = {
   sqrtIter(1.0)
 }
 
-sqrt(1e10)
-
-println(1e3)
 def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
 gcd(14, 21)
 def gcf(a: Int, b: Int): Int = a * b / gcd(a, b)
